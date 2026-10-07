@@ -30,7 +30,6 @@ import {
   ChevronUp,
   ChevronDown,
   Search,
-  Github,
   SlidersHorizontal,
   FileCheck,
   AlertCircle,
@@ -530,7 +529,6 @@ export default function App() {
   const [selectedToolId, setSelectedToolId] = useState<string | null>(null);
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [showDeployGuide, setShowDeployGuide] = useState<boolean>(false);
   const [copiedCommand, setCopiedCommand] = useState<string | null>(null);
 
   // File & Single Workspace State
@@ -1497,13 +1495,6 @@ export default function App() {
             <span>100% In-Browser Engine</span>
           </div>
 
-          <button
-            onClick={() => setShowDeployGuide(true)}
-            className="group relative flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold text-white bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-amber-500 rounded-xl shadow-lg shadow-rose-950/40 hover:shadow-rose-900/60 transition-all whitespace-nowrap cursor-pointer"
-          >
-            <Github className="w-3.5 h-3.5" />
-            <span>GitHub & Vercel</span>
-          </button>
         </div>
       </header>
 
@@ -4537,237 +4528,6 @@ export default function App() {
         )}
       </main>
 
-      {/* ================= GITHUB & VERCEL DEPLOY GUIDE MODAL ================= */}
-      {showDeployGuide && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fade-in">
-          <div
-            className={`relative w-full max-w-2xl rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl max-h-[90vh] overflow-y-auto ${
-              theme === 'dark'
-                ? 'bg-[#0D0F17] border border-white/[0.12] text-slate-200'
-                : 'bg-white border border-slate-200 text-slate-800'
-            }`}
-          >
-            {/* Modal Header */}
-            <div
-              className={`flex items-center justify-between border-b pb-4 ${
-                theme === 'dark' ? 'border-white/[0.08]' : 'border-slate-200'
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                <div
-                  className={`w-10 h-10 rounded-2xl flex items-center justify-center font-bold ${
-                    theme === 'dark'
-                      ? 'bg-white/[0.05] border border-white/[0.08] text-rose-400'
-                      : 'bg-rose-50 border border-rose-100 text-rose-600'
-                  }`}
-                >
-                  <Github className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3
-                    className={`font-display text-base font-bold ${
-                      theme === 'dark' ? 'text-white' : 'text-slate-900'
-                    }`}
-                  >
-                    GitHub & Vercel 1-Click Deployment
-                  </h3>
-                  <p
-                    className={`text-xs ${
-                      theme === 'dark' ? 'text-slate-400' : 'text-slate-500'
-                    }`}
-                  >
-                    Host this high-end PDF suite permanently free with zero backend config
-                  </p>
-                </div>
-              </div>
-              <button
-                onClick={() => setShowDeployGuide(false)}
-                className={`p-2 rounded-xl transition-colors ${
-                  theme === 'dark'
-                    ? 'text-slate-400 hover:text-white hover:bg-white/[0.05]'
-                    : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
-                }`}
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Explanation in Hindi & English */}
-            <div
-              className={`p-4 rounded-2xl text-xs space-y-1 ${
-                theme === 'dark'
-                  ? 'bg-rose-500/10 border border-rose-500/20 text-rose-300'
-                  : 'bg-rose-50 border border-rose-200 text-rose-800'
-              }`}
-            >
-              <p className="font-semibold">
-                🎯 1 मिनट में लाइव करें (GitHub + Vercel):
-              </p>
-              <p
-                className={`leading-relaxed ${
-                  theme === 'dark' ? 'text-slate-300' : 'text-slate-700'
-                }`}
-              >
-                यह पूरा ऐप 100% क्लाइंट-साइड (Browser-based) बना है, यानी इसमें किसी बैकएंड सर्वर की जरूरत नहीं है। आप सीधे अपने GitHub रेपो में कोड पुश करके Vercel पर 1 मिनट में फ्री में लाइव कर सकते हैं!
-              </p>
-            </div>
-
-            {/* Step 1: Git Commands */}
-            <div className="space-y-2">
-              <div className="flex items-center justify-between text-xs">
-                <span
-                  className={`font-bold ${
-                    theme === 'dark' ? 'text-white' : 'text-slate-900'
-                  }`}
-                >
-                  Step 1: Terminal में GitHub पर Push करें
-                </span>
-                <button
-                  onClick={() =>
-                    copyToClipboard(
-                      'git init\ngit add .\ngit commit -m "feat: advanced next-gen pdf suite"\ngit branch -M main\ngit remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git\ngit push -u origin main',
-                      'git-all'
-                    )
-                  }
-                  className="flex items-center gap-1 text-rose-500 hover:text-rose-600 font-semibold"
-                >
-                  {copiedCommand === 'git-all' ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                  <span>{copiedCommand === 'git-all' ? 'Copied Commands!' : 'Copy All Commands'}</span>
-                </button>
-              </div>
-
-              <div
-                className={`border rounded-2xl p-3.5 font-mono text-xs space-y-1 overflow-x-auto ${
-                  theme === 'dark'
-                    ? 'bg-[#08090D] border-white/[0.08] text-slate-300'
-                    : 'bg-slate-900 border-slate-800 text-slate-200'
-                }`}
-              >
-                <p className="text-slate-500"># 1. Initialize git and commit</p>
-                <p>git init</p>
-                <p>git add .</p>
-                <p>git commit -m "feat: advanced next-gen pdf suite"</p>
-                <p className="text-slate-500 pt-1"># 2. Link your GitHub repo and push</p>
-                <p>git branch -M main</p>
-                <p>git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git</p>
-                <p>git push -u origin main</p>
-              </div>
-            </div>
-
-            {/* Step 2: Vercel Instructions */}
-            <div className="space-y-2">
-              <span
-                className={`font-bold text-xs ${
-                  theme === 'dark' ? 'text-white' : 'text-slate-900'
-                }`}
-              >
-                Step 2: Vercel पर 1-Click Import करें
-              </span>
-              <div
-                className={`border rounded-2xl p-4 text-xs space-y-2.5 ${
-                  theme === 'dark'
-                    ? 'bg-[#08090D] border-white/[0.08] text-slate-300'
-                    : 'bg-slate-50 border-slate-200 text-slate-700'
-                }`}
-              >
-                <div className="flex items-start gap-2.5">
-                  <span
-                    className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 font-bold text-[11px] ${
-                      theme === 'dark'
-                        ? 'bg-white/[0.08] text-rose-400'
-                        : 'bg-rose-100 text-rose-600'
-                    }`}
-                  >
-                    1
-                  </span>
-                  <p>
-                    <strong className={theme === 'dark' ? 'text-white' : 'text-slate-900'}>
-                      vercel.com
-                    </strong>{' '}
-                    पर जाएं और "Add New Project" पर क्लिक करें।
-                  </p>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <span
-                    className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 font-bold text-[11px] ${
-                      theme === 'dark'
-                        ? 'bg-white/[0.08] text-rose-400'
-                        : 'bg-rose-100 text-rose-600'
-                    }`}
-                  >
-                    2
-                  </span>
-                  <p>अपने GitHub Repository को सिलेक्ट करें।</p>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <span
-                    className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 font-bold text-[11px] ${
-                      theme === 'dark'
-                        ? 'bg-white/[0.08] text-rose-400'
-                        : 'bg-rose-100 text-rose-600'
-                    }`}
-                  >
-                    3
-                  </span>
-                  <p>
-                    Vercel अपने आप{' '}
-                    <strong className="text-emerald-500 font-semibold">Vite</strong> पहचान लेगा। Build
-                    Command:{' '}
-                    <code
-                      className={`px-1 rounded ${
-                        theme === 'dark' ? 'bg-white/[0.08] text-rose-300' : 'bg-rose-50 text-rose-600 border border-rose-100'
-                      }`}
-                    >
-                      npm run build
-                    </code>
-                    , Output Directory:{' '}
-                    <code
-                      className={`px-1 rounded ${
-                        theme === 'dark' ? 'bg-white/[0.08] text-rose-300' : 'bg-rose-50 text-rose-600 border border-rose-100'
-                      }`}
-                    >
-                      dist
-                    </code>
-                    .
-                  </p>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <span
-                    className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 font-bold text-[11px] ${
-                      theme === 'dark'
-                        ? 'bg-white/[0.08] text-rose-400'
-                        : 'bg-rose-100 text-rose-600'
-                    }`}
-                  >
-                    4
-                  </span>
-                  <p>
-                    <strong className={theme === 'dark' ? 'text-white' : 'text-slate-900'}>
-                      "Deploy"
-                    </strong>{' '}
-                    पर क्लिक करें। 30 सेकंड में आपकी साइट लाइव हो जाएगी!
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Footer close */}
-            <div className="pt-2 flex justify-end">
-              <button
-                onClick={() => setShowDeployGuide(false)}
-                className={`px-6 py-2.5 rounded-xl font-semibold text-xs transition-colors ${
-                  theme === 'dark'
-                    ? 'bg-white/[0.08] hover:bg-white/[0.14] text-white'
-                    : 'bg-slate-100 hover:bg-slate-200 text-slate-800'
-                }`}
-              >
-                Close Guide
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* ================= FOOTER ================= */}
       <footer
         className={`w-full border-t py-7 px-4 sm:px-6 lg:px-8 mt-auto text-xs flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10 transition-colors ${
@@ -4788,14 +4548,6 @@ export default function App() {
           <span>Next-Gen Client-Side PDF Engine</span>
         </div>
         <div className="flex items-center gap-4">
-          <button
-            onClick={() => setShowDeployGuide(true)}
-            className="hover:text-rose-500 transition-colors flex items-center gap-1.5 font-medium"
-          >
-            <Github className="w-3.5 h-3.5" />
-            <span>GitHub Deployment</span>
-          </button>
-          <span>·</span>
           <span className="font-mono text-[11px]">100% In-Browser Memory</span>
         </div>
       </footer>
