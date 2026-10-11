@@ -1,0 +1,6 @@
+{
+  "name": "DocuFlow - Advanced PDF Suite",
+  "description": "Next-generation client-side PDF suite to merge, split, rotate, watermark, protect, and convert documents securely right in your browser.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
